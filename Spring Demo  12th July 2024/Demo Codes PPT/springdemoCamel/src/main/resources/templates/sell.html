@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sell Product</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#sellForm').on('submit', function (event) {
+                event.preventDefault();
+
+                var formData = {
+                    id: $('#productId').val(),
+                    quantity: $('#quantity').val()
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/sellProduct',
+                    data: formData,
+                    success: function (response) {
+                        alert(response); // Display success message
+                        fetchProducts(); // Fetch updated product list
+                    },
+                    error: function (xhr, status, error) {
+                        alert(xhr.responseText); // Display error message
+                    }
+                });
+            });
+
+            // Function to fetch products and update the table and select input
+            function fetchProducts() {
+                $.get('/getProducts', function (data) {
+                    $('#table-data tbody').empty();
+                    $('#productId').empty(); // Clear the select input
+
+                    $.each(data, function (index, product) {
+                        $('#table-data tbody').append(
+                            '<tr>' +
+                            '<td>' + product.name + '</td>' +
+                            '<td>' + product.quantity + '</td>' +
+                            '<td>' + product.price + '</td>' +
+                            '<td>' + product.location + '</td>' +
+                            '</tr>'
+                        );
+
+                        $('#productId').append(
+                            '<option value="' + product.id + '">' +
+                            product.name + ' (' + product.quantity + ')' +
+                            '</option>'
+                        );
+                    });
+                });
+            }
+
+            // Initial fetch to populate the table and select input on page load
+            fetchProducts();
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div id="main-div">
+            <h1>Sell Product</h1>
+            <form id="sellForm">
+                <select id="productId" name="id" required>
+                    <option th:each="product : ${products}" th:value="${product.id}"
+                            th:text="${product.name + ' (' + product.quantity + ')'}"></option>
+                </select>
+                <input id="quantity" type="number" name="quantity" placeholder="Quantity" required>
+                <button type="submit">Sell Product</button>
+            </form>
+        </div>
+        <div id="last-div">
+            <div id="table-data">
+                <table id="t1">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Location</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="product : ${products}">
+                            <td th:text="${product.name}"></td>
+                            <td th:text="${product.quantity}"></td>
+                            <td th:text="${product.price}"></td>
+                            <td th:text="${product.location}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <a href="/">
+                    <button>Add Product</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

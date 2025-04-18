@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Sell Product</title>
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+	<div class="container">
+		<div id="main-div">
+			<h1>Sell Product</h1>
+			<form action="sellProductWithCamel" method="post">
+				<select name="id" required>
+					<option th:each="product : ${products}" th:value="${product.id}"
+						th:text="${product.name} + ' (' + ${product.quantity} + ')'"></option>
+				</select> <input id="inpquantity" type="number" name="quantity"
+					placeholder="Quantity" required>
+				<button type="submit">Sell Product</button>
+			</form>
+		</div>
+		<div id="last-div">
+			<div id="table-data">
+				<table id="t1">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Quantity</th>
+							<th>Price</th>
+							<th>Location</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="product : ${products}">
+							<td th:text="${product.name}"></td>
+							<td th:text="${product.quantity}"></td>
+							<td th:text="${product.price}"></td>
+							<td th:text="${product.location}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div>
+				<a href="/">
+					<button>Add Product</button>
+				</a>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

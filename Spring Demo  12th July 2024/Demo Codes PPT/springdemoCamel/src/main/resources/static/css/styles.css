@@ -1,0 +1,115 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgb(128, 128, 128);
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    scroll-behavior: smooth;
+    align-items: center;
+
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    min-width: 400px;
+    margin: 40px;
+}
+
+.container #main-div,
+#last-div {
+    flex: 1 0 33%;
+}
+
+#main-div {
+    padding: 20px;
+    border: 3px solid rgb(179, 4, 114);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: rgb(192, 192, 192);
+    color: #333333;
+    transition: box-shadow 0.2s ease-in-out;
+    border-radius: 20px;
+    width: 450px;
+    max-width: 90%;
+    text-align: center;
+    margin: 20px 20px;
+}
+
+#last-div {
+    width: 500px;
+    text-align: center;
+    max-width: 90%;
+    margin: 20px 20px;
+    margin-top: 20px;
+    
+}
+/*#t1{
+	border: 2px solid black;
+}*/
+
+#table-data {
+    max-height: 450px;
+    overflow-y: auto;
+    overflow-x: auto;
+   
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+th {
+    background-color: rgb(0, 0, 0);
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+#main-div:hover {
+    box-shadow: 0 0 40px rgb(0, 255, 255);
+}
+
+button {
+    transition: 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: rgb(0, 128, 255);
+}
+
+tr {
+    transition: 0.2s ease-in-out;
+}
+
+tr:hover {
+    background-color: rgb(0, 128, 255);
+}
+
+h1 {
+    color: rgb(128, 0, 0);
+    text-align: center;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+input,
+select,
+button {
+    margin: 5px 0;
+    padding: 10px;
+    width: 98%;
+}
+
+#quantity{
+	width: 94%;
+}
